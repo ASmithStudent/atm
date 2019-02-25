@@ -14,7 +14,9 @@ public class Account {
 
     /**
      * Constructor method that takes in account type, name of account, and initial balance.
-     *
+     * @param type
+     * @param name
+     * @param amount
      */
     public Account(String type, String name, int amount) {
         this.type = type;
@@ -24,6 +26,7 @@ public class Account {
 
     /**
      * Adds amount to account's balance
+     * @param amount
      */
     void credit(int amount) {
         this.balance += amount;
@@ -32,7 +35,8 @@ public class Account {
     /**
      * Subtracts amount from account balance, only if the account's new balance is not less than 0.
      * Returns true if new balance is greater than 0, false if new account balance is less than 0.
-     *
+     * @param amount
+     * @return boolean
      */
     boolean debit(int amount) {
         int new_balance = this.balance - amount;
@@ -47,10 +51,19 @@ public class Account {
 
     /**
      * Returns account balance
+     * @return integer
      */
     int getBalance() {
         return this.balance;
     }
+
+    /**
+     *
+     * @param name
+     * @param type
+     * @param balance
+     * @return String
+     */
 
     public String toString(String name, String type, int balance) {
         return "Name: " + name + " Type: " + type + " Balance: " + balance;

@@ -17,6 +17,10 @@ public class BankUser {
 
     /**
      * BankUser constructor method
+     * @param name
+     * @param id
+     * @param pin
+     * @param accounts
      */
 
     public BankUser(String name, String id, String pin, Account[] accounts) {
