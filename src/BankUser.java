@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
  * A Java class that defines a user at a Bank, tracking the user's id and pin
  * that they use at an ATM machine and the accounts the user owns.
@@ -9,25 +11,35 @@
 
 public class BankUser {
 
+    private static ArrayList<BankUser> bankUsers = new ArrayList<>();
+
+
     Account[] accounts;
-    String name;
     String id;
+    String name;
     String pin;
+
 
 
     /**
      * BankUser constructor method
-     * @param name
-     * @param id
-     * @param pin
-     * @param accounts
+     * @param name User's name
+     * @param id User's id
+     * @param pin User's pin number
+     * @param accounts User accounts
      */
 
     public BankUser(String name, String id, String pin, Account[] accounts) {
-        this.name = name;
+
+
+
+        bankUsers.add(this);
+
         this.id = id;
+        this.name = name;
         this.pin = pin;
         this.accounts = accounts;
+
     }
 
     /**
@@ -35,8 +47,7 @@ public class BankUser {
      * @return Account[]
      */
 
-    Account[] getAccounts() {
-
+    public Account[] getAccounts() {
         return this.accounts;
     }
 
@@ -50,62 +61,30 @@ public class BankUser {
     }
 
     /**
+     * Get's bank user of specified id and pin
+     * @param id Id of user
+     * @param pin Pin of user
+     * @return User or null
+     */
+
+    public static BankUser getUser(String id, String pin) {
+
+        for (BankUser user : bankUsers) {
+            if (pin.equals(user.pin) && id.equals(user.id))  {
+                return user;
+            }
+        }
+        return null;
+    }
+
+    /**
      * Converts BankUser info to string
-     * @return String
+     * @return String that displays bank user
      */
 
     @Override
     public String toString() {
-        return this.name + "[" + this.id + ":" + this.pin + "]";
-    }
-
-    /**
-     * Main method: Creates two users - one with 3 accounts and one with two accounts and then calls methods for each user
-     * @param args
-     * @return void
-     *
-     */
-
-    public static void main(String[] args) {
-
-        // First User
-        Account user1Account1 = new Account("Checking", "Main", 200);
-        Account user1Account2 = new Account("Savings", "Main Savings", 1000);
-        Account user1Account3 = new Account("Investment", "Main Investment", 5000);
-        Account[] user1Accounts = {user1Account1, user1Account2, user1Account3};
-
-        BankUser user1 = new BankUser("Adrian", "usf", "123456", user1Accounts );
-        Account[] userAccounts = user1.getAccounts();
-        for (Account account : userAccounts) {
-            System.out.println(account.toString(account.name, account.type, account.balance));
-        }
-
-        String user1Name = user1.getName();
-        System.out.println("User 1's name: " + user1Name);
-
-        String userInfo = user1.toString();
-        System.out.println("User 1's info: " + userInfo);
-
-
-        // Second User
-        Account user2Account1 = new Account("Savings", "Main", 10000);
-        Account user2Account2 = new Account("401k", "Main", 109000);
-
-
-        Account[] user2Accounts = {user2Account1, user2Account2};
-        BankUser user2 = new BankUser("Doug", "usf", "654321", user2Accounts);
-
-        Account[] user2Accs = user2.getAccounts();
-        for (Account account : user2Accs) {
-            System.out.println(account.toString(account.name, account.type, account.balance));
-        }
-
-        String user2Name = user2.getName();
-        System.out.println("User 2's name: " + user2Name);
-
-        String user2Info = user2.toString();
-        System.out.println("User 2's info: " + user2Info);
-
+        return this.name + "[" + "id: " + this.id + ":" +  "pin: " + this.pin + "]";
     }
 
 

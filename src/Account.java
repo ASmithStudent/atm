@@ -8,25 +8,31 @@
 
 public class Account {
 
-    int balance;
-    String name;
-    String type;
+   public static int idCount;
+
+   private String type;
+   private String name;
+   private int balance;
+   private String accountId;
+
 
     /**
      * Constructor method that takes in account type, name of account, and initial balance.
-     * @param type
-     * @param name
-     * @param amount
+     * @param type Type of account
+     * @param name Name of account
+     * @param amount How much is in the account
      */
     public Account(String type, String name, int amount) {
         this.type = type;
         this.name = name;
         this.balance = amount;
+        idCount++;
+        this.accountId = "BankOfUSF" + idCount;
     }
 
     /**
      * Adds amount to account's balance
-     * @param amount
+     * @param amount How much money to add to the account
      */
     void credit(int amount) {
         this.balance += amount;
@@ -35,8 +41,8 @@ public class Account {
     /**
      * Subtracts amount from account balance, only if the account's new balance is not less than 0.
      * Returns true if new balance is greater than 0, false if new account balance is less than 0.
-     * @param amount
-     * @return boolean
+     * @param amount How much money to remove from the account
+     * @return boolean True or false
      */
     boolean debit(int amount) {
         int new_balance = this.balance - amount;
@@ -51,7 +57,7 @@ public class Account {
 
     /**
      * Returns account balance
-     * @return integer
+     * @return integer of user balance
      */
     int getBalance() {
         return this.balance;
@@ -59,48 +65,11 @@ public class Account {
 
     /**
      *
-     * @param name
-     * @param type
-     * @param balance
-     * @return String
+     * @return A string with account details
      */
 
-    public String toString(String name, String type, int balance) {
-        return "Name: " + name + " Type: " + type + " Balance: " + balance;
-    }
-
-
-    public static void main(String[] args) {
-
-        Account account1 = new Account("checking", "Adrian", 1000);
-
-        account1.credit(500);
-        String account1Info = account1.toString(account1.name, account1.type, account1.balance);
-
-        System.out.print(account1Info);
-
-
-//        account1.credit(10);
-//        System.out.println("Account type: " + account1.type + " Account name: " + account1.name + " Account balance: " + account1.balance);
-//
-//        account1.debit(9);
-//        System.out.println("Account type: " + account1.type + " Account name: " + account1.name + " Account balance: " + account1.balance);
-//
-//        account1.getBalance();
-//        System.out.println("Account type: " + account1.type + " Account name: " + account1.name + " Account balance: " + account1.balance);
-//
-//        Account account2 = new Account("savings", "Jack", 5000);
-//
-//        account2.credit(100);
-//        System.out.println("Account type: " + account2.type + " Account name: " + account2.name + " Account balance: " + account2.balance);
-//
-//        account2.debit(1000);
-//        System.out.println("Account type: " + account2.type + " Account name: " + account2.name + " Account balance: " + account2.balance);
-//
-//        account2.getBalance();
-//        System.out.println("Account type: " + account2.type + " Account name: " + account2.name + " Account balance: " + account2.balance);
-
-
+    public String toString() {
+        return this.name + " " + this.type + "[" + this.type + " id=" + this.accountId + "]";
     }
 
 }
